@@ -40,7 +40,7 @@ class ContactService {
     }
     //findOne
     async findById(id){
-        return await this.Contact.fineOne({
+        return await this.Contact.findOne({
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         });
     }
@@ -71,7 +71,7 @@ class ContactService {
     //deleteALL
     async deleteAll(){
         const result = await this.Contact.deleteMany({});
-        return result.deletedCount;
+        return result.deleteCount;
     }
 } 
 
