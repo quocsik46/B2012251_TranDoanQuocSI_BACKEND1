@@ -5,30 +5,29 @@ class ContactService {
     }
     // class contactService
     //Dinh nghia cac phuong thuc truy xuat CSDL su dung mongodb API
-     extractConactData(payload) {
+    extractConactData(payload) {
         const contact = {
-            name: payload.name,
-            email:payload.email,
-            adddress:payload.adddress,
-            phone:payload.phone,
-            favorite:payload.favorite,
+        name: payload.name,
+        email: payload.email,
+        address: payload.address,
+        phone: payload.phone,
+        favorite: payload.favorite,
         };
-        //Remove undefined fields
-        Objects.keys(contact).forEach(
-            (key) => contact [key] == undefined && delete contact[key]
+        // Remove undefined fields
+        Object.keys(contact).forEach(
+        (key) => contact[key] === undefined && delete contact[key]
         );
         return contact;
-    }
-    //create
-    async create(payload) {
+        }
+        async create(payload) {
         const contact = this.extractConactData(payload);
         const result = await this.Contact.findOneAndUpdate(
-            contact,
-            { $set: { favorite: contact.favorite == true }},
-            { returnDocument: "after", upsert: true}
+        contact,
+        { $set: { favorite: contact.favorite = true } },
+        { returnDocument: "after", upsert: true }
         );
         return result.value;
-    }
+        }
     //findALL
     async find(filter){
         const cursor = await this.Contact.find(filter);
